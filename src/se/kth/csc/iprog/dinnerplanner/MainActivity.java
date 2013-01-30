@@ -17,7 +17,8 @@ import android.widget.Toast;
 
 @SuppressLint("ShowToast")
 public class MainActivity extends Activity {
-
+	int nr_guests = 0;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,6 +74,10 @@ public class MainActivity extends Activity {
 	}
 	private void showAppetizer() {
 		setContentView(R.layout.appetizer);
+		
+		Button nrGuests = (Button) findViewById(R.id.changeNumberOfGuests);
+		nrGuests.setText("Guests: " + nr_guests);
+		
 		Button next = (Button) findViewById(R.id.next_appetizer);
 		
 		next.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +97,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Toast toast = Toast.makeText(getBaseContext(), "back", 1900);
 				toast.show();
+				setupStart();
 			}
 		});
 		

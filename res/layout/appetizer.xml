@@ -1,97 +1,103 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal" >
 
-	<LinearLayout
-		android:layout_width="fill_parent" 
-		android:layout_height="200dp" 
-		android:orientation="horizontal" >
+        <Button
+            android:id="@+id/changeNumberOfGuests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Guests" />
 
-		<Button android:id="@+id/changeNumberOfGuests"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="Guests"
-			android:layout_gravity="left" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="right"
+            android:orientation="horizontal" >
 
-		<LinearLayout
-			android:layout_width="fill_parent" 
-			android:layout_height="fill_parent" 
-			android:orientation="horizontal"
-			android:gravity="right" >
+            <ImageView
+                android:id="@+id/shopplistImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/meatballs" />
 
-			<ImageView android:id="@+id/shopplistImage"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:src="@drawable/meatballs" />
-			<TextView android:id="@+id/sumPrice"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="$100"  />
-		
-		</LinearLayout>
-	</LinearLayout>
-	
-	<LinearLayout
-		android:layout_width="fill_parent" 
-		android:layout_height="600dp" 
-		android:orientation="horizontal" >
-	
-		<RadioGroup
-		    android:layout_width="200dp"
-		    android:layout_height="wrap_content"
-		    android:orientation="vertical"
-		    android:id="@+id/radio_group1">
+            <TextView
+                android:id="@+id/sumPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$100" />
+        </LinearLayout>
+    </LinearLayout>
 
-		    <RadioButton
-		        android:id="@+id/radio_right1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-				android:drawableRight="@drawable/icecream"
-		        android:text="MAT"
-				android:checked="true"/>
-		    <RadioButton
-		        android:id="@+id/radio_left1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-				android:drawableRight="@drawable/icecream"
-		        android:text="MAAAT" />
-		    <RadioButton
-		        android:id="@+id/radio_ambi1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-				android:drawableRight="@drawable/icecream"
-		        android:text="MER MAATTT" />
-		</RadioGroup>
-	</LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="600dp"
+        android:orientation="horizontal" >
 
+        <RadioGroup
+            android:id="@+id/radio_group1"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+		    
 
-	<LinearLayout
-		android:layout_width="fill_parent" 
-		android:layout_height="200dp" 
-		android:orientation="horizontal" >
-		<TextView
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_centerHorizontal="true"
-		    android:layout_centerVertical="true"
-		    android:text="Fisk" />
-		<Button android:id="@+id/back_appetizer"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Back"
-				android:layout_gravity="left" />
-	
-		<Button android:id="@+id/next_appetizer"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Next"
-				android:layout_gravity="left" />
-	</LinearLayout>
-	
-	
-	
-	
-	
+            <RadioButton
+                android:id="@+id/radio_right1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:drawableRight="@drawable/icecream"
+                android:text="MAT" />
+		    
+
+            <RadioButton
+                android:id="@+id/radio_left1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/icecream"
+                android:text="MAAAT" />
+		    
+
+            <RadioButton
+                android:id="@+id/radio_ambi1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/icecream"
+                android:text="MER MAATTT" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Fisk" />
+
+        <Button
+            android:id="@+id/back_appetizer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Back" />
+
+        <Button
+            android:id="@+id/next_appetizer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Next" />
+    </LinearLayout>
+
 </LinearLayout>
