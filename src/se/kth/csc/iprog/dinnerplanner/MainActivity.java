@@ -1,6 +1,8 @@
 package se.kth.csc.iprog.dinnerplanner;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import se.kth.csc.iprog.dinnerplanner.model.DinnerModel;
@@ -13,6 +15,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.EventLogTags.Description;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -21,6 +24,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TableLayout;
@@ -65,18 +69,6 @@ public class MainActivity extends Activity {
 						nr_guests = "5";//input.getEditableText().toString();
 						dialog.dismiss();
 						setupAppetizer(Dish.STARTER);
-						
-						//back from ingredients
-//						Button backIngridient = (Button) findViewById(R.id.back_ingredient);
-//						backIngridient.setOnClickListener(new View.OnClickListener() {
-//							
-//							@Override
-//							public void onClick(View v) {
-//								setupStart();
-//								setContentView(R.layout.activity_main);
-//							}
-//
-//						});
 					}
 
 				});
@@ -97,7 +89,7 @@ public class MainActivity extends Activity {
 				setupIngredients();	
 			}
 		});
-		DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();;
+		DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();
 		((TextView)findViewById(R.id.sumPrice)).setText("$" + NumberFormat.getInstance().format(model.getTotalMenuPrice()) );
 		
 		Button nrGuests = (Button) findViewById(R.id.changeNumberOfGuests);
@@ -134,12 +126,14 @@ public class MainActivity extends Activity {
 					setupAppetizer(Dish.DESERT);
 					break;
 				case Dish.DESERT:
+					setupPreparation();
 					break;
 					
 				default:
 					break;
 				}
 			}
+
 
 		});
 		
@@ -170,7 +164,7 @@ public class MainActivity extends Activity {
 		TableLayout table = (TableLayout) findViewById(R.id.starters_table);
 		Set<Dish> food = model.getDishesOfType(dishtype);
 		
-		for (Dish dish : food) {
+		for (final Dish dish : food) {
 			TableRow row = new TableRow(getBaseContext());
 			
 			CheckBox radioButton = new CheckBox(getBaseContext());
@@ -181,18 +175,94 @@ public class MainActivity extends Activity {
 			imageView.setImageResource(dish.getImage());
 			row.addView(imageView);
 			
-			TextView t = new TextView(getBaseContext());
+			TextView t = new TextView(getApplicationContext());
 			t.setText(dish.getName());
+			t.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					setupDescription(dish);
+				}
+
+			});
 			row.addView(t);
 			
-			t = new TextView(getBaseContext());
-			t.setText(dish.getDescription());
-			t.setWidth(200);
-			row.addView(t);
+			TextView t2 = new TextView(getBaseContext());
+			t2.setText(dish.getDescription());
+			t2.setWidth(200);
+			row.addView(t2);
 			table.addView(row);
 		}
 	}
 
+	private void setupPreparation() {
+		setContentView(R.layout.preparations);
+		
+		DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();
+		List<Dish> menu = new ArrayList<Dish>();
+		menu.addAll(model.getFullMenu());
+		
+		LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+		int size = 32;
+		String text = "Starter";
+		
+		TextView header = getTextView(size, text);
+		layout.addView(header);
+		
+		layout.addView(getTextView(12, menu.get(0).getDescription()));
+		
+		
+		layout.addView(getTextView(32, "Main Dish"));
+		
+		layout.addView(getTextView(12, menu.get(1).getDescription()));
+		
+		
+		
+		Button back = (Button) findViewById(R.id.back_prep);
+		
+		back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				setupAppetizer(Dish.DESERT);
+			}
+		});
+	}
+
+	private TextView getTextView(int size, String text) {
+		TextView header = new TextView(getApplicationContext());
+		header.setTextSize(size);
+		header.setText(text);
+		return header;
+	}
+
+	private void setupDescription(Dish dish) {
+		setContentView(R.layout.description);
+		
+		TextView recipe = (TextView) findViewById(R.id.recept);
+		recipe.setText(dish.getDescription());
+		String totalIngredient = "";
+		for (Ingredient ingredient: dish.getIngredients()) {
+			totalIngredient += ingredient.getQuantity() + " " + ingredient.getUnit() + " " + ingredient.getName() + "\n";//.getName() + " " + ingredient.getQuantity() + "\n";
+		}
+		TextView ingr = (TextView) findViewById(R.id.ingredienser);
+		ingr.setText(totalIngredient);
+		
+		ImageView img = (ImageView) findViewById(R.id.dishImage);
+		img.setImageResource(dish.getImage());
+		
+		
+		Button back = (Button) findViewById(R.id.back_desc);
+		
+		back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				setupAppetizer(Dish.STARTER);
+			}
+		});
+	}
+	
 	private void setupIngredients() {
 		setContentView(R.layout.ingredient);
 		DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();
@@ -228,19 +298,6 @@ public class MainActivity extends Activity {
 			findViewById.addView(row);
 		}
 		
-//		Button next = (Button) findViewById(R.id.next_appetizer);
-//		
-//		next.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				Toast toast = Toast.makeText(getBaseContext(), "abc", 1900);
-//				toast.show();
-//				setupIngredients();
-//			}
-//
-//		});
-//		
 		Button back = (Button) findViewById(R.id.back_ingredient);
 		
 		back.setOnClickListener(new View.OnClickListener() {

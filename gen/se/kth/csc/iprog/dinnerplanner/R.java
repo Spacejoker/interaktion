@@ -23,6 +23,7 @@ public final class R {
         public static final int back_appetizer=0x7f070007;
         public static final int back_desc=0x7f07000d;
         public static final int back_ingredient=0x7f07000f;
+        public static final int back_prep=0x7f070014;
         public static final int back_to_ingredient=0x7f070009;
         public static final int changeNumberOfGuests=0x7f070002;
         public static final int choose_header=0x7f070005;
@@ -30,7 +31,8 @@ public final class R {
         public static final int dialogButtonOK=0x7f070012;
         public static final int dishImage=0x7f07000b;
         public static final int ingredienser=0x7f07000a;
-        public static final int menu_settings=0x7f070013;
+        public static final int layout=0x7f070013;
+        public static final int menu_settings=0x7f070015;
         public static final int next_appetizer=0x7f070008;
         public static final int num_guests_input=0x7f070011;
         public static final int recept=0x7f07000c;
@@ -48,6 +50,7 @@ public final class R {
         public static final int description=0x7f030003;
         public static final int ingredient=0x7f030004;
         public static final int number_guests=0x7f030005;
+        public static final int preparations=0x7f030006;
     }
     public static final class menu {
         public static final int activity_main=0x7f060000;
