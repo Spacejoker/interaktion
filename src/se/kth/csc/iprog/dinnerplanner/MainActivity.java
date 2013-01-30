@@ -34,7 +34,6 @@ import android.widget.Toast;
 
 @SuppressLint("ShowToast")
 public class MainActivity extends Activity {
-	String nr_guests = "0";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +44,8 @@ public class MainActivity extends Activity {
 
 	private void setupStart() {
 		setContentView(R.layout.activity_main);
-		
-		//To get the dinner model you can use the following code:
-		DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();
-		
+
+		final DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();
 		Button btnDownload = (Button) findViewById(R.id.create_menu);
 		btnDownload.setOnClickListener(new View.OnClickListener() {
 			
@@ -58,22 +55,26 @@ public class MainActivity extends Activity {
 				final Dialog dialog = new Dialog(context);
 				dialog.setContentView(R.layout.number_guests);
 				dialog.setTitle("Nr of guests");
-	
 				
 				Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
 				// if button is clicked, close the custom dialog
+	 
+				dialog.show();
+				
+				final EditText input = (EditText) dialog.findViewById(R.id.num_guests_input);
 				dialogButton.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						//EditText input = (EditText) findViewById(R.id.num_guests_input);
-						nr_guests = "5";//input.getEditableText().toString();
+						String str = "0";
+						if(input.getEditableText().toString().length() > 0){
+							str = input.getEditableText().toString();
+						}
+						model.setNumberOfGuests(Integer.parseInt(str));
 						dialog.dismiss();
 						setupAppetizer(Dish.STARTER);
 					}
-
+					
 				});
-	 
-				dialog.show();
 			}
 		});
 		
@@ -93,7 +94,7 @@ public class MainActivity extends Activity {
 		((TextView)findViewById(R.id.sumPrice)).setText("$" + NumberFormat.getInstance().format(model.getTotalMenuPrice()) );
 		
 		Button nrGuests = (Button) findViewById(R.id.changeNumberOfGuests);
-		nrGuests.setText("Guests: " + nr_guests);
+		nrGuests.setText("Guests: " + model.getNumberOfGuests());
 		
 		TextView header = (TextView) findViewById(R.id.choose_header);
 		header.setTextSize(32);
@@ -199,6 +200,12 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.preparations);
 		
 		DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();
+		((TextView)findViewById(R.id.sumPrice)).setText("$" + NumberFormat.getInstance().format(model.getTotalMenuPrice()) );
+		
+		Button nrGuests = (Button) findViewById(R.id.changeNumberOfGuests);
+		nrGuests.setText("Guests: " + model.getNumberOfGuests());
+		
+		
 		List<Dish> menu = new ArrayList<Dish>();
 		menu.addAll(model.getFullMenu());
 		
@@ -211,12 +218,9 @@ public class MainActivity extends Activity {
 		
 		layout.addView(getTextView(12, menu.get(0).getDescription()));
 		
-		
 		layout.addView(getTextView(32, "Main Dish"));
 		
 		layout.addView(getTextView(12, menu.get(1).getDescription()));
-		
-		
 		
 		Button back = (Button) findViewById(R.id.back_prep);
 		
@@ -225,6 +229,15 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				setupAppetizer(Dish.DESERT);
+			}
+		});
+		
+		View shopplistImage = findViewById(R.id.shopplistImage);
+		shopplistImage.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				setupIngredients();	
 			}
 		});
 	}
@@ -238,6 +251,13 @@ public class MainActivity extends Activity {
 
 	private void setupDescription(Dish dish) {
 		setContentView(R.layout.description);
+		
+		DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();
+		((TextView)findViewById(R.id.sumPrice)).setText("$" + NumberFormat.getInstance().format(model.getTotalMenuPrice()) );
+		
+		Button nrGuests = (Button) findViewById(R.id.changeNumberOfGuests);
+		nrGuests.setText("Guests: " + model.getNumberOfGuests());
+		
 		
 		TextView recipe = (TextView) findViewById(R.id.recept);
 		recipe.setText(dish.getDescription());
