@@ -4,6 +4,7 @@ import java.text.NumberFormat;
 import java.util.Set;
 
 import se.kth.csc.iprog.dinnerplanner.model.DinnerModel;
+import se.kth.csc.iprog.dinnerplanner.model.Dish;
 import se.kth.csc.iprog.dinnerplanner.model.Ingredient;
 
 import android.os.Bundle;
@@ -11,12 +12,17 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -58,7 +64,7 @@ public class MainActivity extends Activity {
 						//EditText input = (EditText) findViewById(R.id.num_guests_input);
 						nr_guests = "5";//input.getEditableText().toString();
 						dialog.dismiss();
-						showAppetizer();
+						setupAppetizer(Dish.STARTER);
 						
 						//back from ingredients
 //						Button backIngridient = (Button) findViewById(R.id.back_ingredient);
@@ -80,21 +86,59 @@ public class MainActivity extends Activity {
 		});
 		
 	}
-	private void showAppetizer() {
+	private void setupAppetizer(final int dishtype) {
 		setContentView(R.layout.appetizer);
+		
+		View shopplistImage = findViewById(R.id.shopplistImage);
+		shopplistImage.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				setupIngredients();	
+			}
+		});
+		DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();;
+		((TextView)findViewById(R.id.sumPrice)).setText("$" + NumberFormat.getInstance().format(model.getTotalMenuPrice()) );
 		
 		Button nrGuests = (Button) findViewById(R.id.changeNumberOfGuests);
 		nrGuests.setText("Guests: " + nr_guests);
 		
+		TextView header = (TextView) findViewById(R.id.choose_header);
+		header.setTextSize(32);
+		header.setGravity(Gravity.CENTER);
+		
+		switch (dishtype) {
+		case Dish.STARTER:
+			header.setText("Choose Appetizer");
+			break;
+		case Dish.MAIN:
+			header.setText("Choose Main Dish");
+			break;
+		case Dish.DESERT:
+			header.setText("Choose Dessert");
+			break;
+		default:
+			break;
+		}
 		Button next = (Button) findViewById(R.id.next_appetizer);
 		
 		next.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Toast toast = Toast.makeText(getBaseContext(), "abc", 1900);
-				toast.show();
-				setupIngredients();
+				switch (dishtype) {
+				case Dish.STARTER:
+					setupAppetizer(Dish.MAIN);
+					break;
+				case Dish.MAIN:
+					setupAppetizer(Dish.DESERT);
+					break;
+				case Dish.DESERT:
+					break;
+					
+				default:
+					break;
+				}
 			}
 
 		});
@@ -105,12 +149,48 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Toast toast = Toast.makeText(getBaseContext(), "back", 1900);
-				toast.show();
+				switch (dishtype) {
+				case Dish.STARTER:
 				setupStart();
+					break;
+				case Dish.MAIN:
+				setupAppetizer(Dish.STARTER);
+					break;
+
+				case Dish.DESERT:
+				setupAppetizer(Dish.MAIN);
+					break;
+
+				default:
+					break;
+				}
 			}
 		});
 		
+		TableLayout table = (TableLayout) findViewById(R.id.starters_table);
+		Set<Dish> food = model.getDishesOfType(dishtype);
+		
+		for (Dish dish : food) {
+			TableRow row = new TableRow(getBaseContext());
+			
+			CheckBox radioButton = new CheckBox(getBaseContext());
+			radioButton.setGravity(Gravity.CENTER);
+			row.addView(radioButton);
+			
+			ImageView imageView = new ImageView(getBaseContext());
+			imageView.setImageResource(dish.getImage());
+			row.addView(imageView);
+			
+			TextView t = new TextView(getBaseContext());
+			t.setText(dish.getName());
+			row.addView(t);
+			
+			t = new TextView(getBaseContext());
+			t.setText(dish.getDescription());
+			t.setWidth(200);
+			row.addView(t);
+			table.addView(row);
+		}
 	}
 
 	private void setupIngredients() {
@@ -120,11 +200,23 @@ public class MainActivity extends Activity {
 		
 		//build table from model
 		TableLayout findViewById = (TableLayout) findViewById(R.id.tableLayout1);
+		TableRow row = new TableRow(getBaseContext());
+		TextView textView = new TextView(getBaseContext());
+		textView.setText("Ingridient");
+		row.addView(textView);
+		textView = new TextView(getBaseContext());
+		textView.setText("Quantity");
+		row.addView(textView);
+		textView = new TextView(getBaseContext());
+		textView.setText("Cost");
+		row.addView(textView);
+		findViewById.addView(row);
+		
 		for (Ingredient ingredient : allIngredients) {
 			
 			NumberFormat format = NumberFormat.getInstance();
-			TableRow row = new TableRow(getBaseContext());
-			TextView textView = new TextView(getBaseContext());
+			row = new TableRow(getBaseContext());
+			textView = new TextView(getBaseContext());
 			textView.setText(ingredient.getName());
 			row.addView(textView);
 			textView = new TextView(getBaseContext());
@@ -149,17 +241,15 @@ public class MainActivity extends Activity {
 //
 //		});
 //		
-//		Button back = (Button) findViewById(R.id.back_appetizer);
-//		
-//		back.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				Toast toast = Toast.makeText(getBaseContext(), "back", 1900);
-//				toast.show();
-//				setupStart();
-//			}
-//		});
+		Button back = (Button) findViewById(R.id.back_ingredient);
+		
+		back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				setupAppetizer(Dish.STARTER);//Start();
+			}
+		});
 		
 	}
 	
