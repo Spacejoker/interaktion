@@ -9,7 +9,9 @@ public class DinnerModel implements IDinnerModel {
 	
 
 	Set<Dish> dishes = new HashSet<Dish>();
-	
+    Set<Dish> selectedDishes = new HashSet<Dish>();
+	public int numberOfGuests;
+
 	/**
 	 * TODO: For Lab2 you need to implement the IDinnerModel interface.
 	 * When you do this you will have all the needed fields and methods
@@ -63,6 +65,36 @@ public class DinnerModel implements IDinnerModel {
 		dish2.addIngredient(dish2ing10);
 		dish2.addIngredient(dish2ing11);
 		dishes.add(dish2);
+
+        Dish dish3 = new Dish("Ice Cream",Dish.DESERT,R.drawable.icecream,"Take out icream from the freezer, let it warm for 5 minutes. Serve.");
+		Ingredient dish3ing1 = new Ingredient("mango sorbet",1,"kg",30);
+		dish2.addIngredient(dish3ing1);
+		dishes.add(dish3);
+
+        Dish dish3 = new Dish("Ice Cream",Dish.DESERT,R.drawable.icecream,"Take out icream from the freezer, let it warm for 5 minutes. Serve.");
+		Ingredient dish3ing1 = new Ingredient("mango sorbet",1,"kg",30);
+		dish3.addIngredient(dish3ing1);
+		dishes.add(dish3);
+
+        Dish dish4 = new Dish("Sourdough",Dish.STARTER,R.drawable.food_sourdough,"Serve with beer.");
+		Ingredient dish4ing1 = new Ingredient("sourdough",500,"g",30);
+        Ingredient dish4ing2 = new Ingredient("beer",10,"l",200);
+		dish4.addIngredient(dish4ing1);
+        dish4.addIngredient(dish4ing2);
+		dishes.add(dish4);
+
+        Dish dish5 = new Dish("Baked Brie",Dish.DESERT,R.drawable.bakedbrie,"Bake the brie in a oven for 10 minutes, serve on crackers.");
+		Ingredient dish5ing1 = new Ingredient("brie",1,"kg",50);
+        Ingredient dish5ing2 = new Ingredient("cracker",3,"kg",30);
+		dish5.addIngredient(dish5ing1);
+        dish5.addIngredient(dish5ing2);
+		dishes.add(dish5);
+
+        Dish dish6 = new Dish("GI-Falafel",Dish.MAIN,R.drawable.meatballs,"Serve fafafel, done.");
+		Ingredient dish6ing1 = new Ingredient("falafel",1,"kg",100);
+		dish3.addIngredient(dish6ing1);
+		dishes.add(dish6);
+
 		
 		
 	}
@@ -103,19 +135,20 @@ public class DinnerModel implements IDinnerModel {
 
 	@Override
 	public int getNumberOfGuests() {
-		// TODO Auto-generated method stub
-		return 10;
+		return this.numberOfGuests;
 	}
 
 	@Override
 	public void setNumberOfGuests(int numberOfGuests) {
-		// TODO Auto-generated method stub
-		
+		this.numberOfGuests = numberOfGuests;
 	}
 
 	@Override
 	public Dish getSelectedDish(int type) {
-		// TODO Auto-generated method stub
+		for (Dish d : selectedDishes) {
+			if(d.getType == type)
+                return d;
+		}
 		return null;
 	}
 
@@ -127,20 +160,27 @@ public class DinnerModel implements IDinnerModel {
 	@Override
 	public Set<Ingredient> getAllIngredients() {
 		Set<Ingredient> ret = new HashSet<Ingredient>();
-		for (Dish d : dishes) {
+		for (Dish d : selectedDishes) {
 			for (Ingredient i : d.ingredients) {
 				ret.add(i);
 			}
 		}
-		// TODO Auto-generated method stub
 		return ret;
 	}
 
 	@Override
 	public float getTotalMenuPrice() {
-		// TODO Auto-generated method stub
-		return 16;
+        int sum = 0;    		
+        for (Ingredient i : getAllIngredients())
+        {
+            sum += i.getPrice();
+        }
+		return sum;
 	}
+
+    public void addDishToMenu(Menu dish) {
+        selectedDishes.add(dish);
+    }
 	
 	
 
