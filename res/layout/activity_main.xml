@@ -4,11 +4,32 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
+   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical" >
+    
+    <ImageView
+        android:id="@+id/startsidan"
+        android:layout_width="600dp"
+        android:layout_height="350dp"
+        android:src="@drawable/diningtable" />
+       
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+        android:text="@string/ultimate" />
+    
+    <Button
+        android:id="@+id/create_menu"
+        android:layout_width="500dp"
+        android:layout_height="100dp"
+        android:layout_gravity="right"
+        android:text="@string/create" />
+   </LinearLayout> 
 
 </RelativeLayout>

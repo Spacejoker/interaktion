@@ -2,7 +2,8 @@
 <resources>
 
     <string name="app_name">DinnerPlanner</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="create">Create new dinner</string>
     <string name="menu_settings">Settings</string>
+    <string name="ultimate">Ultimate dinner party mode is on</string>
 
 </resources>

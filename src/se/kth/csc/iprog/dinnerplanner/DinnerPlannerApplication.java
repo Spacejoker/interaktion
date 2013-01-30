@@ -14,6 +14,4 @@ public class DinnerPlannerApplication extends Application {
 	public void setModel(DinnerModel model) {
 		this.model = model;
 	}
-
-
 }
