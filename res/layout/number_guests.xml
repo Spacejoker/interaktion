@@ -10,6 +10,7 @@
         android:text="Enter nr of guests"/>
  
     <EditText
+        android:id="@+id/num_guests_input"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
      android:inputType="number" />

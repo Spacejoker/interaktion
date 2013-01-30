@@ -125,8 +125,14 @@ public class DinnerModel implements IDinnerModel {
 
 	@Override
 	public Set<Ingredient> getAllIngredients() {
+		Set<Ingredient> ret = new HashSet<Ingredient>();
+		for (Dish d : dishes) {
+			for (Ingredient i : d.ingredients) {
+				ret.add(i);
+			}
+		}
 		// TODO Auto-generated method stub
-		return new HashSet<Ingredient>();
+		return ret;
 	}
 
 	@Override
