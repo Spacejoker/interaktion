@@ -39,7 +39,7 @@
 		android:orientation="horizontal" >
 	
 		<RadioGroup
-		    android:layout_width="200dp"
+		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:orientation="vertical"
 		    android:id="@+id/radio_group1">
@@ -48,21 +48,21 @@
 		        android:id="@+id/radio_right1"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-				android:drawableRight="@drawable/icecream"
-		        android:text="MAT"
-				android:checked="true"/>
+			android:drawableRight="@drawable/icecream"
+		        android:text="Jag vill ha glass!"
+			android:checked="true"/>
 		    <RadioButton
 		        android:id="@+id/radio_left1"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-				android:drawableRight="@drawable/icecream"
-		        android:text="MAAAT" />
+			android:drawableRight="@drawable/icecream"
+		        android:text="Mer glass!" />
 		    <RadioButton
 		        android:id="@+id/radio_ambi1"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-				android:drawableRight="@drawable/icecream"
-		        android:text="MER MAATTT" />
+			android:drawableRight="@drawable/icecream"
+		        android:text="Mindre glass!" />
 		</RadioGroup>
 	</LinearLayout>
 
@@ -71,23 +71,22 @@
 		android:layout_width="fill_parent" 
 		android:layout_height="200dp" 
 		android:orientation="horizontal" >
-		<TextView
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_centerHorizontal="true"
-		    android:layout_centerVertical="true"
-		    android:text="Fisk" />
+		
 		<Button android:id="@+id/back_appetizer"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Back"
+			android:layout_gravity="left" />
+		<LinearLayout
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parentdp" 
+			android:orientation="horizontal" 
+			android:gravity="right">
+			<Button android:id="@+id/next_appetizer"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Back"
-				android:layout_gravity="left" />
-	
-		<Button android:id="@+id/next_appetizer"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Next"
-				android:layout_gravity="left" />
+				android:text="Next"/>
+		</LinearLayout>
 	</LinearLayout>
 	
 	
