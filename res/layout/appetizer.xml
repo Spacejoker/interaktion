@@ -81,17 +81,23 @@
                 android:id="@+id/apa1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jag vill ha glass" />
+                android:text="Jag vill ha glass"
+		android:gravity="center"
+		android:height="200dp" />
             <TextView
                 android:id="@+id/apa2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mer glass" />
+                android:text="Mer glass"
+		android:gravity="center"
+		android:height="200dp" />
             <TextView
                 android:id="@+id/apa3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mindre glass" />
+                android:text="Mindre glass"
+		android:gravity="center"
+		android:height="200dp" />
         </LinearLayout>
     </LinearLayout>
             
