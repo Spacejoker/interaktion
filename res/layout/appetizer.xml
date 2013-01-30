@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:orientation="horizontal" >
 
         <Button
@@ -25,7 +25,7 @@
                 android:id="@+id/shopplistImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/meatballs" />
+                android:src="@drawable/list" />
 
             <TextView
                 android:id="@+id/sumPrice"
@@ -35,97 +35,46 @@
         </LinearLayout>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/choose_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    
+    <TableLayout
+        android:id="@+id/starters_table"
+        android:layout_width="fill_parent"
+        android:layout_height="500dp"
+        android:shrinkColumns="*"
+        android:stretchColumns="*" >
+    </TableLayout>
+        
+
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="600dp"
+        android:layout_height="200dp"
         android:orientation="horizontal" >
-        
-        <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="fill_parent"
-            android:orientation="vertical" >
-            <RadioGroup
-                android:id="@+id/radio_group1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-                
 
-                <RadioButton
-                    android:id="@+id/radio_right1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:drawableRight="@drawable/icecream" />
-                
-
-                <RadioButton
-                    android:id="@+id/radio_left1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/icecream" />
-                
-
-                <RadioButton
-                    android:id="@+id/radio_ambi1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/icecream" />
-            </RadioGroup>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="fill_parent"
-            android:orientation="vertical" >
-            <TextView
-                android:id="@+id/apa1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Jag vill ha glass"
-		android:gravity="center"
-		android:height="200dp" />
-            <TextView
-                android:id="@+id/apa2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mer glass"
-		android:gravity="center"
-		android:height="200dp" />
-            <TextView
-                android:id="@+id/apa3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mindre glass"
-		android:gravity="center"
-		android:height="200dp" />
-        </LinearLayout>
-    </LinearLayout>
-            
+        <Button
+            android:id="@+id/back_appetizer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Back" />
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="200dp"
+            android:layout_height="fill_parent"
+            android:gravity="right"
             android:orientation="horizontal" >
 
             <Button
-                android:id="@+id/back_appetizer"
+                android:id="@+id/next_appetizer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Back" />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="right"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/next_appetizer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Next" />
-            </LinearLayout>
+                android:text="Next" />
         </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
