@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
 						//EditText input = (EditText) findViewById(R.id.num_guests_input);
 						nr_guests = "5";//input.getEditableText().toString();
 						dialog.dismiss();
-						showAppetizer();
+						setupAppetizer();
 						
 						//back from ingredients
 //						Button backIngridient = (Button) findViewById(R.id.back_ingredient);
@@ -80,8 +80,20 @@ public class MainActivity extends Activity {
 		});
 		
 	}
-	private void showAppetizer() {
+	
+	private void setupAppetizer() {
 		setContentView(R.layout.appetizer);
+		
+		View shopplistImage = findViewById(R.id.shopplistImage);
+		shopplistImage.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				setupIngredients();	
+			}
+		});
+		DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();;
+		((TextView)findViewById(R.id.sumPrice)).setText("$" + NumberFormat.getInstance().format(model.getTotalMenuPrice()) );
 		
 		Button nrGuests = (Button) findViewById(R.id.changeNumberOfGuests);
 		nrGuests.setText("Guests: " + nr_guests);
@@ -92,8 +104,6 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Toast toast = Toast.makeText(getBaseContext(), "abc", 1900);
-				toast.show();
 				setupIngredients();
 			}
 
@@ -105,8 +115,6 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Toast toast = Toast.makeText(getBaseContext(), "back", 1900);
-				toast.show();
 				setupStart();
 			}
 		});
@@ -120,11 +128,23 @@ public class MainActivity extends Activity {
 		
 		//build table from model
 		TableLayout findViewById = (TableLayout) findViewById(R.id.tableLayout1);
+		TableRow row = new TableRow(getBaseContext());
+		TextView textView = new TextView(getBaseContext());
+		textView.setText("Ingridient");
+		row.addView(textView);
+		textView = new TextView(getBaseContext());
+		textView.setText("Quantity");
+		row.addView(textView);
+		textView = new TextView(getBaseContext());
+		textView.setText("Cost");
+		row.addView(textView);
+		findViewById.addView(row);
+		
 		for (Ingredient ingredient : allIngredients) {
 			
 			NumberFormat format = NumberFormat.getInstance();
-			TableRow row = new TableRow(getBaseContext());
-			TextView textView = new TextView(getBaseContext());
+			row = new TableRow(getBaseContext());
+			textView = new TextView(getBaseContext());
 			textView.setText(ingredient.getName());
 			row.addView(textView);
 			textView = new TextView(getBaseContext());
@@ -149,17 +169,15 @@ public class MainActivity extends Activity {
 //
 //		});
 //		
-//		Button back = (Button) findViewById(R.id.back_appetizer);
-//		
-//		back.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				Toast toast = Toast.makeText(getBaseContext(), "back", 1900);
-//				toast.show();
-//				setupStart();
-//			}
-//		});
+		Button back = (Button) findViewById(R.id.back_ingredient);
+		
+		back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				setupAppetizer();//Start();
+			}
+		});
 		
 	}
 	
