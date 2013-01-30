@@ -27,6 +27,12 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/meatballs" />
 
+            <ImageView
+                android:id="@+id/shopplistImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/meatballs" />
+
             <TextView
                 android:id="@+id/sumPrice"
                 android:layout_width="wrap_content"
@@ -42,7 +48,7 @@
 
         <RadioGroup
             android:id="@+id/radio_group1"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 		    
@@ -53,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:drawableRight="@drawable/icecream"
-                android:text="MAT" />
+                android:text="Jag vill ha glass!" />
 		    
 
             <RadioButton
@@ -61,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/icecream"
-                android:text="MAAAT" />
+                android:text="Mer glass!" />
 		    
 
             <RadioButton
@@ -69,35 +75,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/icecream"
-                android:text="MER MAATTT" />
+                android:text="Mindre glass!" />
         </RadioGroup>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="200dp"
-        android:orientation="horizontal" >
+    <RadioGroup
+        android:id="@+id/radio_group1"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+		    
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="Fisk" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/back_appetizer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Back" />
+            <Button
+                android:id="@+id/back_appetizer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Back" />
 
-        <Button
-            android:id="@+id/next_appetizer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Next" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parentdp"
+                android:gravity="right"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/next_appetizer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Next" />
+            </LinearLayout>
+        </LinearLayout>
+    </RadioGroup>
 
 </LinearLayout>
