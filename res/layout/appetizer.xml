@@ -1,40 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:id="@+id/appetizer_layout" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/changeNumberOfGuests"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Guests" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="right"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/shopplistImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/list" />
-
-            <TextView
-                android:id="@+id/sumPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$100" />
-        </LinearLayout>
-    </LinearLayout>
-
+    <include layout="@layout/topbar"/>
+    
     <TextView
         android:id="@+id/choose_header"
         android:layout_width="wrap_content"

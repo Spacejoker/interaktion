@@ -11,6 +11,7 @@ import se.kth.csc.iprog.dinnerplanner.model.Ingredient;
 
 import android.os.Bundle;
 import android.annotation.SuppressLint;
+import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -44,43 +45,19 @@ public class MainActivity extends Activity {
 
 	private void setupStart() {
 		setContentView(R.layout.activity_main);
-
+		
 		final DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();
-		Button btnDownload = (Button) findViewById(R.id.create_menu);
-		btnDownload.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Context context = v.getContext();
-				final Dialog dialog = new Dialog(context);
-				dialog.setContentView(R.layout.number_guests);
-				dialog.setTitle("Nr of guests");
-				
-				Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-				// if button is clicked, close the custom dialog
-	 
-				dialog.show();
-				
-				final EditText input = (EditText) dialog.findViewById(R.id.num_guests_input);
-				dialogButton.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						String str = "0";
-						if(input.getEditableText().toString().length() > 0){
-							str = input.getEditableText().toString();
-						}
-						model.setNumberOfGuests(Integer.parseInt(str));
-						dialog.dismiss();
-						setupAppetizer(Dish.STARTER);
-					}
-					
-				});
-			}
-		});
+		new StartController(new StartView(this, model));
 		
 	}
-	private void setupAppetizer(final int dishtype) {
+	void setupAppetizer(final int dishtype) {
 		setContentView(R.layout.appetizer);
+		
+//		if (  true ){
+//			LinearLayout view = (LinearLayout) findViewById(R.id.appetizer_layout);
+////			view.addView(new TopBarView(getApplicationContext()));
+//			return;
+//		}
 		
 		View shopplistImage = findViewById(R.id.shopplistImage);
 		shopplistImage.setOnClickListener(new View.OnClickListener() {
@@ -90,12 +67,14 @@ public class MainActivity extends Activity {
 				setupIngredients();	
 			}
 		});
-		DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();
+		final DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();
 		((TextView)findViewById(R.id.sumPrice)).setText("$" + NumberFormat.getInstance().format(model.getTotalMenuPrice()) );
 		
-		Button nrGuests = (Button) findViewById(R.id.changeNumberOfGuests);
-		nrGuests.setText("Guests: " + model.getNumberOfGuests());
+//		addContentView(new TopBarView(getApplicationContext()), new LinearLayout(getApplicationContext()).getLayoutParams());
 		
+//		Button nrGuests = (Button) findViewById(R.id.changeNumberOfGuests);
+//		nrGuests.setText("Guests: " + model.getNumberOfGuests());
+//		
 		TextView header = (TextView) findViewById(R.id.choose_header);
 		header.setTextSize(32);
 		header.setGravity(Gravity.CENTER);
@@ -170,6 +149,13 @@ public class MainActivity extends Activity {
 			
 			CheckBox radioButton = new CheckBox(getBaseContext());
 			radioButton.setGravity(Gravity.CENTER);
+			radioButton.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					model.addDishToMenu(dish);
+				}
+			});
 			row.addView(radioButton);
 			
 			ImageView imageView = new ImageView(getBaseContext());
@@ -216,11 +202,16 @@ public class MainActivity extends Activity {
 		TextView header = getTextView(size, text);
 		layout.addView(header);
 		
-		layout.addView(getTextView(12, menu.get(0).getDescription()));
+		layout.addView(getTextView(12, model.getSelectedDish(Dish.STARTER).getDescription()));
 		
 		layout.addView(getTextView(32, "Main Dish"));
 		
-		layout.addView(getTextView(12, menu.get(1).getDescription()));
+		layout.addView(getTextView(12, model.getSelectedDish(Dish.MAIN).getDescription()));
+		
+		layout.addView(getTextView(32, "Dessert"));
+		
+		layout.addView(getTextView(12, model.getSelectedDish(Dish.DESERT).getDescription()));
+		
 		
 		Button back = (Button) findViewById(R.id.back_prep);
 		
@@ -310,7 +301,7 @@ public class MainActivity extends Activity {
 			textView.setText(ingredient.getName());
 			row.addView(textView);
 			textView = new TextView(getBaseContext());
-			textView.setText(format.format(ingredient.getQuantity() ));
+			textView.setText(format.format(ingredient.getQuantity() ) + " " + ingredient.getUnit());
 			row.addView(textView);
 			textView = new TextView(getBaseContext());
 			textView.setText(format.format(ingredient.getPrice()));

@@ -1,58 +1,67 @@
 package se.kth.csc.iprog.dinnerplanner.model;
 
 import java.util.HashSet;
+import java.util.Observable;
 import java.util.Set;
 
 import se.kth.csc.iprog.dinnerplanner.R;
 
-public class DinnerModel implements IDinnerModel {
-	
+public class DinnerModel extends Observable implements IDinnerModel {
 
 	Set<Dish> dishes = new HashSet<Dish>();
-    Set<Dish> selectedDishes = new HashSet<Dish>();
+	Set<Dish> selectedDishes = new HashSet<Dish>();
 	public int numberOfGuests;
 
 	/**
-	 * TODO: For Lab2 you need to implement the IDinnerModel interface.
-	 * When you do this you will have all the needed fields and methods
-	 * for the dinner planner (number of guests, selected dishes, etc.). 
+	 * TODO: For Lab2 you need to implement the IDinnerModel interface. When you
+	 * do this you will have all the needed fields and methods for the dinner
+	 * planner (number of guests, selected dishes, etc.).
 	 */
-	
-	
+
 	/**
 	 * The constructor of the overall model. Set the default values here
 	 */
-	public DinnerModel(){
-		
-		
-		
-		
-		//Adding some example data, you can add more
-		Dish dish1 = new Dish("French toast",Dish.STARTER,R.drawable.toast,"In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot.");
-		Ingredient dish1ing1 = new Ingredient("eggs",0.5,"",1);
-		Ingredient dish1ing2 = new Ingredient("milk",30,"ml",6);
-		Ingredient dish1ing3 = new Ingredient("brown sugar",7,"g",1);
-		Ingredient dish1ing4 = new Ingredient("ground nutmeg",0.5,"g",12);
-		Ingredient dish1ing5 = new Ingredient("white bread",2,"slices",2);
+	public DinnerModel() {
+
+		// Adding some example data, you can add more
+		Dish dish1 = new Dish(
+				"French toast",
+				Dish.STARTER,
+				R.drawable.toast,
+				"In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot.");
+		Ingredient dish1ing1 = new Ingredient("eggs", 0.5, "", 1);
+		Ingredient dish1ing2 = new Ingredient("milk", 30, "ml", 6);
+		Ingredient dish1ing3 = new Ingredient("brown sugar", 7, "g", 1);
+		Ingredient dish1ing4 = new Ingredient("ground nutmeg", 0.5, "g", 12);
+		Ingredient dish1ing5 = new Ingredient("white bread", 2, "slices", 2);
 		dish1.addIngredient(dish1ing1);
 		dish1.addIngredient(dish1ing2);
 		dish1.addIngredient(dish1ing3);
 		dish1.addIngredient(dish1ing4);
 		dish1.addIngredient(dish1ing5);
 		dishes.add(dish1);
-		
-		Dish dish2 = new Dish("Meat balls",Dish.MAIN,R.drawable.meatballs,"Preheat an oven to 400 degrees F (200 degrees C). Place the beef into a mixing bowl, and season with salt, onion, garlic salt, Italian seasoning, oregano, red pepper flakes, hot pepper sauce, and Worcestershire sauce; mix well. Add the milk, Parmesan cheese, and bread crumbs. Mix until evenly blended, then form into 1 1/2-inch meatballs, and place onto a baking sheet. Bake in the preheated oven until no longer pink in the center, 20 to 25 minutes.");
-		Ingredient dish2ing1 = new Ingredient("extra lean ground beef",115,"g",20);
-		Ingredient dish2ing2 = new Ingredient("sea salt",0.7,"g",3);
-		Ingredient dish2ing3 = new Ingredient("small onion, diced",0.25,"",2);
-		Ingredient dish2ing4 = new Ingredient("garlic salt",0.6,"g",3);
-		Ingredient dish2ing5 = new Ingredient("Italian seasoning",0.3,"g",3);
-		Ingredient dish2ing6 = new Ingredient("dried oregano",0.3,"g",3);
-		Ingredient dish2ing7 = new Ingredient("crushed red pepper flakes",0.6,"g",3);
-		Ingredient dish2ing8 = new Ingredient("Worcestershire sauce",16,"ml",7);
-		Ingredient dish2ing9 = new Ingredient("milk",20,"ml",4);
-		Ingredient dish2ing10 = new Ingredient("grated Parmesan cheese",5,"g",8);
-		Ingredient dish2ing11 = new Ingredient("seasoned bread crumbs",115,"g",4);
+
+		Dish dish2 = new Dish(
+				"Meat balls",
+				Dish.MAIN,
+				R.drawable.meatballs,
+				"Preheat an oven to 400 degrees F (200 degrees C). Place the beef into a mixing bowl, and season with salt, onion, garlic salt, Italian seasoning, oregano, red pepper flakes, hot pepper sauce, and Worcestershire sauce; mix well. Add the milk, Parmesan cheese, and bread crumbs. Mix until evenly blended, then form into 1 1/2-inch meatballs, and place onto a baking sheet. Bake in the preheated oven until no longer pink in the center, 20 to 25 minutes.");
+		Ingredient dish2ing1 = new Ingredient("extra lean ground beef", 115,
+				"g", 20);
+		Ingredient dish2ing2 = new Ingredient("sea salt", 0.7, "g", 3);
+		Ingredient dish2ing3 = new Ingredient("small onion, diced", 0.25, "", 2);
+		Ingredient dish2ing4 = new Ingredient("garlic salt", 0.6, "g", 3);
+		Ingredient dish2ing5 = new Ingredient("Italian seasoning", 0.3, "g", 3);
+		Ingredient dish2ing6 = new Ingredient("dried oregano", 0.3, "g", 3);
+		Ingredient dish2ing7 = new Ingredient("crushed red pepper flakes", 0.6,
+				"g", 3);
+		Ingredient dish2ing8 = new Ingredient("Worcestershire sauce", 16, "ml",
+				7);
+		Ingredient dish2ing9 = new Ingredient("milk", 20, "ml", 4);
+		Ingredient dish2ing10 = new Ingredient("grated Parmesan cheese", 5,
+				"g", 8);
+		Ingredient dish2ing11 = new Ingredient("seasoned bread crumbs", 115,
+				"g", 4);
 		dish2.addIngredient(dish2ing1);
 		dish2.addIngredient(dish2ing2);
 		dish2.addIngredient(dish2ing3);
@@ -66,67 +75,72 @@ public class DinnerModel implements IDinnerModel {
 		dish2.addIngredient(dish2ing11);
 		dishes.add(dish2);
 
-        Dish dish3 = new Dish("Ice Cream",Dish.DESERT,R.drawable.icecream,"Take out icream from the freezer, let it warm for 5 minutes. Serve.");
-		Ingredient dish3ing1 = new Ingredient("mango sorbet",1,"kg",30);
+		Dish dish3 = new Dish("Ice Cream", Dish.DESERT, R.drawable.icecream,
+				"Take out icream from the freezer, let it warm for 5 minutes. Serve.");
+		Ingredient dish3ing1 = new Ingredient("mango sorbet", 1, "kg", 30);
 		dish2.addIngredient(dish3ing1);
 		dishes.add(dish3);
 
-        Dish dish3 = new Dish("Ice Cream",Dish.DESERT,R.drawable.icecream,"Take out icream from the freezer, let it warm for 5 minutes. Serve.");
-		Ingredient dish3ing1 = new Ingredient("mango sorbet",1,"kg",30);
-		dish3.addIngredient(dish3ing1);
-		dishes.add(dish3);
+		// Dish dish3 = new
+		// Dish("Ice Cream",Dish.DESERT,R.drawable.icecream,"Take out icream from the freezer, let it warm for 5 minutes. Serve.");
+		// Ingredient dish3ing1 = new Ingredient("mango sorbet",1,"kg",30);
+		// dish3.addIngredient(dish3ing1);
+		// dishes.add(dish3);
 
-        Dish dish4 = new Dish("Sourdough",Dish.STARTER,R.drawable.food_sourdough,"Serve with beer.");
-		Ingredient dish4ing1 = new Ingredient("sourdough",500,"g",30);
-        Ingredient dish4ing2 = new Ingredient("beer",10,"l",200);
+		Dish dish4 = new Dish("Sourdough", Dish.STARTER,
+				R.drawable.toast, "Serve with beer.");
+		Ingredient dish4ing1 = new Ingredient("sourdough", 500, "g", 30);
+		Ingredient dish4ing2 = new Ingredient("beer", 10, "l", 200);
 		dish4.addIngredient(dish4ing1);
-        dish4.addIngredient(dish4ing2);
+		dish4.addIngredient(dish4ing2);
 		dishes.add(dish4);
 
-        Dish dish5 = new Dish("Baked Brie",Dish.DESERT,R.drawable.bakedbrie,"Bake the brie in a oven for 10 minutes, serve on crackers.");
-		Ingredient dish5ing1 = new Ingredient("brie",1,"kg",50);
-        Ingredient dish5ing2 = new Ingredient("cracker",3,"kg",30);
+		Dish dish5 = new Dish("Baked Brie", Dish.DESERT, R.drawable.icecream,
+				"Bake the brie in a oven for 10 minutes, serve on crackers.");
+		Ingredient dish5ing1 = new Ingredient("brie", 1, "kg", 50);
+		Ingredient dish5ing2 = new Ingredient("cracker", 3, "kg", 30);
 		dish5.addIngredient(dish5ing1);
-        dish5.addIngredient(dish5ing2);
+		dish5.addIngredient(dish5ing2);
 		dishes.add(dish5);
 
-        Dish dish6 = new Dish("GI-Falafel",Dish.MAIN,R.drawable.meatballs,"Serve fafafel, done.");
-		Ingredient dish6ing1 = new Ingredient("falafel",1,"kg",100);
-		dish3.addIngredient(dish6ing1);
+		Dish dish6 = new Dish("GI-Falafel", Dish.MAIN, R.drawable.meatballs,
+				"Serve fafafel, done.");
+		Ingredient dish6ing1 = new Ingredient("falafel", 1, "kg", 100);
+		dish6.addIngredient(dish6ing1);
 		dishes.add(dish6);
 
-		
-		
 	}
-	
+
 	/**
-	 * Returns the set of dishes of specific type. (1 = starter, 2 = main, 3 = desert).
+	 * Returns the set of dishes of specific type. (1 = starter, 2 = main, 3 =
+	 * desert).
 	 */
-	public Set<Dish> getDishes(){
+	public Set<Dish> getDishes() {
 		return dishes;
 	}
-	
+
 	/**
-	 * Returns the set of dishes of specific type. (1 = starter, 2 = main, 3 = desert).
+	 * Returns the set of dishes of specific type. (1 = starter, 2 = main, 3 =
+	 * desert).
 	 */
-	public Set<Dish> getDishesOfType(int type){
+	public Set<Dish> getDishesOfType(int type) {
 		Set<Dish> result = new HashSet<Dish>();
-		for(Dish d : dishes){
-			if(d.getType() == type){
+		for (Dish d : dishes) {
+			if (d.getType() == type) {
 				result.add(d);
 			}
 		}
 		return result;
 	}
-	
+
 	/**
-	 * Returns the set of dishes of specific type, that contain filter in their name
-	 * or name of any ingredient. 
+	 * Returns the set of dishes of specific type, that contain filter in their
+	 * name or name of any ingredient.
 	 */
-	public Set<Dish> filterDishesOfType(int type, String filter){
+	public Set<Dish> filterDishesOfType(int type, String filter) {
 		Set<Dish> result = new HashSet<Dish>();
-		for(Dish d : dishes){
-			if(d.getType() == type && d.contains(filter)){
+		for (Dish d : dishes) {
+			if (d.getType() == type && d.contains(filter)) {
 				result.add(d);
 			}
 		}
@@ -141,15 +155,17 @@ public class DinnerModel implements IDinnerModel {
 	@Override
 	public void setNumberOfGuests(int numberOfGuests) {
 		this.numberOfGuests = numberOfGuests;
+		setChanged();
+		notifyObservers();
 	}
 
 	@Override
 	public Dish getSelectedDish(int type) {
 		for (Dish d : selectedDishes) {
-			if(d.getType == type)
-                return d;
+			if (d.getType() == type)
+				return d;
 		}
-		return null;
+		return new Dish("", Dish.DESERT, R.drawable.meatballs, "");
 	}
 
 	@Override
@@ -170,18 +186,15 @@ public class DinnerModel implements IDinnerModel {
 
 	@Override
 	public float getTotalMenuPrice() {
-        int sum = 0;    		
-        for (Ingredient i : getAllIngredients())
-        {
-            sum += i.getPrice();
-        }
+		int sum = 0;
+		for (Ingredient i : getAllIngredients()) {
+			sum += i.getPrice();
+		}
 		return sum;
 	}
 
-    public void addDishToMenu(Menu dish) {
-        selectedDishes.add(dish);
-    }
-	
-	
+	public void addDishToMenu(Dish dish) {
+		selectedDishes.add(dish);
+	}
 
 }
