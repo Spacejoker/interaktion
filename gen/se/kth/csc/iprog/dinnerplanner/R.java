@@ -22,7 +22,6 @@ public final class R {
         public static final int toast=0x7f020008;
     }
     public static final class id {
-        public static final int TopBarView=0x7f070016;
         public static final int appetizer_layout=0x7f070002;
         public static final int back_appetizer=0x7f070005;
         public static final int back_desc=0x7f07000e;
@@ -36,7 +35,7 @@ public final class R {
         public static final int dishImage=0x7f07000c;
         public static final int ingredienser=0x7f07000b;
         public static final int layout=0x7f070014;
-        public static final int menu_settings=0x7f070017;
+        public static final int menu_settings=0x7f070016;
         public static final int next_appetizer=0x7f070006;
         public static final int num_guests_input=0x7f070012;
         public static final int recept=0x7f07000d;

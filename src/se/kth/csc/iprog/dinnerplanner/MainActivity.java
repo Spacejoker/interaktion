@@ -52,134 +52,134 @@ public class MainActivity extends Activity {
 	}
 	void setupAppetizer(final int dishtype) {
 		setContentView(R.layout.appetizer);
-		
-//		if (  true ){
-//			LinearLayout view = (LinearLayout) findViewById(R.id.appetizer_layout);
-////			view.addView(new TopBarView(getApplicationContext()));
-//			return;
-//		}
-		
-		View shopplistImage = findViewById(R.id.shopplistImage);
-		shopplistImage.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				setupIngredients();	
-			}
-		});
-		final DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();
-		((TextView)findViewById(R.id.sumPrice)).setText("$" + NumberFormat.getInstance().format(model.getTotalMenuPrice()) );
-		
-//		addContentView(new TopBarView(getApplicationContext()), new LinearLayout(getApplicationContext()).getLayoutParams());
-		
-//		Button nrGuests = (Button) findViewById(R.id.changeNumberOfGuests);
-//		nrGuests.setText("Guests: " + model.getNumberOfGuests());
 //		
-		TextView header = (TextView) findViewById(R.id.choose_header);
-		header.setTextSize(32);
-		header.setGravity(Gravity.CENTER);
-		
-		switch (dishtype) {
-		case Dish.STARTER:
-			header.setText("Choose Appetizer");
-			break;
-		case Dish.MAIN:
-			header.setText("Choose Main Dish");
-			break;
-		case Dish.DESERT:
-			header.setText("Choose Dessert");
-			break;
-		default:
-			break;
-		}
-		Button next = (Button) findViewById(R.id.next_appetizer);
-		
-		next.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				switch (dishtype) {
-				case Dish.STARTER:
-					setupAppetizer(Dish.MAIN);
-					break;
-				case Dish.MAIN:
-					setupAppetizer(Dish.DESERT);
-					break;
-				case Dish.DESERT:
-					setupPreparation();
-					break;
-					
-				default:
-					break;
-				}
-			}
-
-
-		});
-		
-		Button back = (Button) findViewById(R.id.back_appetizer);
-		
-		back.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				switch (dishtype) {
-				case Dish.STARTER:
-				setupStart();
-					break;
-				case Dish.MAIN:
-				setupAppetizer(Dish.STARTER);
-					break;
-
-				case Dish.DESERT:
-				setupAppetizer(Dish.MAIN);
-					break;
-
-				default:
-					break;
-				}
-			}
-		});
-		
-		TableLayout table = (TableLayout) findViewById(R.id.starters_table);
-		Set<Dish> food = model.getDishesOfType(dishtype);
-		
-		for (final Dish dish : food) {
-			TableRow row = new TableRow(getBaseContext());
-			
-			CheckBox radioButton = new CheckBox(getBaseContext());
-			radioButton.setGravity(Gravity.CENTER);
-			radioButton.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					model.addDishToMenu(dish);
-				}
-			});
-			row.addView(radioButton);
-			
-			ImageView imageView = new ImageView(getBaseContext());
-			imageView.setImageResource(dish.getImage());
-			row.addView(imageView);
-			
-			TextView t = new TextView(getApplicationContext());
-			t.setText(dish.getName());
-			t.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					setupDescription(dish);
-				}
-
-			});
-			row.addView(t);
-			
-			TextView t2 = new TextView(getBaseContext());
-			t2.setText(dish.getDescription());
-			t2.setWidth(200);
-			row.addView(t2);
-			table.addView(row);
-		}
+////		if (  true ){
+////			LinearLayout view = (LinearLayout) findViewById(R.id.appetizer_layout);
+//////			view.addView(new TopBarView(getApplicationContext()));
+////			return;
+////		}
+//		
+//		View shopplistImage = findViewById(R.id.shopplistImage);
+//		shopplistImage.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				setupIngredients();	
+//			}
+//		});
+//		final DinnerModel model = ((DinnerPlannerApplication) this.getApplication()).getModel();
+//		((TextView)findViewById(R.id.sumPrice)).setText("$" + NumberFormat.getInstance().format(model.getTotalMenuPrice()) );
+//		
+////		addContentView(new TopBarView(getApplicationContext()), new LinearLayout(getApplicationContext()).getLayoutParams());
+//		
+////		Button nrGuests = (Button) findViewById(R.id.changeNumberOfGuests);
+////		nrGuests.setText("Guests: " + model.getNumberOfGuests());
+////		
+//		TextView header = (TextView) findViewById(R.id.choose_header);
+//		header.setTextSize(32);
+//		header.setGravity(Gravity.CENTER);
+//		
+//		switch (dishtype) {
+//		case Dish.STARTER:
+//			header.setText("Choose Appetizer");
+//			break;
+//		case Dish.MAIN:
+//			header.setText("Choose Main Dish");
+//			break;
+//		case Dish.DESERT:
+//			header.setText("Choose Dessert");
+//			break;
+//		default:
+//			break;
+//		}
+//		Button next = (Button) findViewById(R.id.next_appetizer);
+//		
+//		next.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				switch (dishtype) {
+//				case Dish.STARTER:
+//					setupAppetizer(Dish.MAIN);
+//					break;
+//				case Dish.MAIN:
+//					setupAppetizer(Dish.DESERT);
+//					break;
+//				case Dish.DESERT:
+//					setupPreparation();
+//					break;
+//					
+//				default:
+//					break;
+//				}
+//			}
+//
+//
+//		});
+//		
+//		Button back = (Button) findViewById(R.id.back_appetizer);
+//		
+//		back.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				switch (dishtype) {
+//				case Dish.STARTER:
+//				setupStart();
+//					break;
+//				case Dish.MAIN:
+//				setupAppetizer(Dish.STARTER);
+//					break;
+//
+//				case Dish.DESERT:
+//				setupAppetizer(Dish.MAIN);
+//					break;
+//
+//				default:
+//					break;
+//				}
+//			}
+//		});
+//		
+//		TableLayout table = (TableLayout) findViewById(R.id.starters_table);
+//		Set<Dish> food = model.getDishesOfType(dishtype);
+//		
+//		for (final Dish dish : food) {
+//			TableRow row = new TableRow(getBaseContext());
+//			
+//			CheckBox radioButton = new CheckBox(getBaseContext());
+//			radioButton.setGravity(Gravity.CENTER);
+//			radioButton.setOnClickListener(new View.OnClickListener() {
+//				
+//				@Override
+//				public void onClick(View v) {
+//					model.addDishToMenu(dish);
+//				}
+//			});
+//			row.addView(radioButton);
+//			
+//			ImageView imageView = new ImageView(getBaseContext());
+//			imageView.setImageResource(dish.getImage());
+//			row.addView(imageView);
+//			
+//			TextView t = new TextView(getApplicationContext());
+//			t.setText(dish.getName());
+//			t.setOnClickListener(new View.OnClickListener() {
+//				
+//				@Override
+//				public void onClick(View v) {
+//					setupDescription(dish);
+//				}
+//
+//			});
+//			row.addView(t);
+//			
+//			TextView t2 = new TextView(getBaseContext());
+//			t2.setText(dish.getDescription());
+//			t2.setWidth(200);
+//			row.addView(t2);
+//			table.addView(row);
+//		}
 	}
 
 	private void setupPreparation() {
